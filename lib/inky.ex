@@ -233,7 +233,7 @@ defmodule Inky do
   end
 
   def handle_call(request, from, state) do
-    Logger.warn("Dropping unexpected call #{inspect(request)} from #{inspect(from)}")
+    Logger.warning("Dropping unexpected call #{inspect(request)} from #{inspect(from)}")
     {:reply, :ok, state}
   end
 
@@ -246,7 +246,7 @@ defmodule Inky do
   end
 
   def handle_cast(request, state) do
-    Logger.warn("Dropping unexpected cast #{inspect(request)}")
+    Logger.warning("Dropping unexpected cast #{inspect(request)}")
     {:noreply, state}
   end
 
