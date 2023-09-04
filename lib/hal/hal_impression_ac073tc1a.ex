@@ -114,7 +114,7 @@ defmodule Inky.HAL.ImpressionAC073TC1A do
 
   @impl HAL
   def handle_update(pixels, border, push_policy, state = %State{}) do
-    Logger.info("push_policy: #{inspect(push_policy, pretty: true)}")
+    Logger.info("JAX #{__MODULE__} start update with push_policy: #{inspect(push_policy, pretty: true)}")
     display = %Display{width: w, height: h, rotation: r} = state.display
     buffer = PixelUtil.pixels_to_bits(pixels, w, h, r, @color_map, 4)
     reset(state)
@@ -123,6 +123,9 @@ defmodule Inky.HAL.ImpressionAC073TC1A do
       :cont -> do_update(state, display, border, buffer)
       :halt -> {:error, :device_busy}
     end
+    |> tap(fn _ ->
+      Logger.info("JAX #{__MODULE__} finish update")
+    end)
   end
 
   #
